@@ -25,4 +25,4 @@ services:
       CMS_DATABASE_USER: xibo
       CMS_DATABASE_PASSWORD: xibopass
     ports:
-      - "80:80"
+      - "8080:80"
