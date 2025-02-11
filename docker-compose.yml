@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: xibo-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: xibo
+      MYSQL_USER: xibo
+      MYSQL_PASSWORD: xibopass
+    ports:
+      - "3306:3306"
+
+  cms:
+    image: xibosignage/xibo-cms:latest
+    container_name: xibo-cms
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      CMS_DATABASE_HOST: mysql
+      CMS_DATABASE_NAME: xibo
+      CMS_DATABASE_USER: xibo
+      CMS_DATABASE_PASSWORD: xibopass
+    ports:
+      - "80:80"
