@@ -12,6 +12,7 @@ services:
       MYSQL_PASSWORD: xibopass
     ports:
       - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password  # <- CORRIGE O ERRO DO MYSQL
 
   cms:
     image: xibosignage/xibo-cms:latest
@@ -25,4 +26,5 @@ services:
       CMS_DATABASE_USER: xibo
       CMS_DATABASE_PASSWORD: xibopass
     ports:
-      - "8080:80"
+      - "8080:80"  # <- PORTA CORRETA PARA O RENDER
+    command: ["/bin/sh", "-c", "sleep 10 && apache2-foreground"]  # <- ESPERA O MYSQL ANTES DE INICIAR
